@@ -11,6 +11,23 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --blue-1: #03045e;
+  --blue-2: #023e8a;
+  --blue-3: #0077b6;
+  --blue-4: #0096c7;
+  --blue-5: #00b4d8;
+  --blue-6: #48cae4;
+  --blue-7: #90e0ef;
+  --blue-8: #90e0ef;
+  --blue-9: #ade8f4;
+  --blue-10: #caf0f8;
+
+  --tan-1: #edede9;
+  --tan-2: #d6ccc2;
+  --tan-3: #f5ebe0;
+  --tan-4: #e3d5ca;
+  --tan-5: #d5bdaf;
 }
 
 a {
