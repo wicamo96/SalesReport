@@ -1,0 +1,26 @@
+.alignLeft {
+    padding: 0 0 0 3%;
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 27%;
+}
+
+.navItem {
+    align-self: center;
+    flex: 1 10%;
+}
+
+.navBar {
+    list-style-type: none;
+    position: sticky;
+    align-self: flex-start;
+    top: 0;
+    margin: 0;
+    padding: 1% 0 1% 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: var(--blue-10);
+    display: flex;
+    justify-content: center;
+}

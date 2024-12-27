@@ -1,12 +1,26 @@
 import './App.css'
-import { Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 import { Dashboard } from './components/dashboard/Dashboard.jsx'
+import { NavBar } from './components/navBar/NavBar.jsx'
+import { Footer } from './components/footer/Footer.jsx'
+import { LineChart } from './components/lineChart/LineChart.jsx'
 
 export const App = () => {
 
   return (
     <Routes>
-      <Route path='/' element={<Dashboard />}/>
+      <Route 
+        path='/' 
+        element={
+          <>
+            <NavBar />
+            <Outlet />
+            <Footer />
+          </>
+        } >
+          <Route index element={<Dashboard />} />
+          <Route path='line' element={<LineChart />} />
+        </Route>
     </Routes>
   )
 }
