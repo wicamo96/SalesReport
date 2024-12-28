@@ -29,7 +29,7 @@ namespace SalesReport.Controllers
             return "value";
         }
 
-        [HttpGet("GetByProductId")]
+        [HttpGet("GetByProductId/{productId}")]
         public IActionResult GetByProductId(int productId)
         {
             var salesOrderDetails = _salesOrderDetailRepository.GetByProductId(productId);
