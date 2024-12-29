@@ -1,0 +1,18 @@
+.lineChart {
+    margin: 10vh auto;
+}
+
+.lineChartFilter {
+    height: 20vh;
+    width: 50vw;
+    margin: 20px auto;
+    overflow-y: scroll;
+}
+
+.lineChartFilterTitle {
+    background-color: transparent;
+}
+
+.margin {
+    margin: 20px auto;
+}
