@@ -9,7 +9,7 @@ export const Footer = () => {
                 <ul className='footerList noPadding'>
                     <li className='footerListItem'><a href="/">Home</a></li>
                     <li className='footerListItem'><a href='/line'>Line Chart</a></li>
-                    <li className='footerListItem'>Bar Chart</li>
+                    <li className='footerListItem'><a href='/bar'>Bar Chart</a></li>
                     <li className='footerListItem'>Scatter Plot</li>
                     <li className='footerListItem'>Pie Chart</li>
                     <li className='footerListItem'>Heat Map</li>
