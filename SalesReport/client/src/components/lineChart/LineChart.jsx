@@ -44,8 +44,8 @@ export const LineChart = () => {
     }, [chartProductId])
 
     useEffect(() => {
-        const w = window.innerWidth * 0.5
-        const h = window.innerHeight * 0.5
+        const w = window.innerWidth * 0.75
+        const h = window.innerHeight * 0.75
 
         const svg = d3.select(svgRef.current)
                       .attr("width", w)
@@ -53,51 +53,50 @@ export const LineChart = () => {
                       .style('background', '#d3d3d3')
                       .style("overflow", "visible")
 
-        if (salesData[0]?.orderQty) {
+        if (!salesData.length) {
+            svg.selectAll('path').remove()
+            svg.selectAll('g').remove()
+        }
+        else if (salesData[0]?.orderQty) {
             
-            const parseDate = d3.timeParse("%Y-%m-%d")
-            let parsedData = [...salesData]
-            
-            // parsedData.forEach(d => {
-            //     if (d.modifiedDate) {
-            //         d.modifiedDate = parseDate(d.modifiedDate)
-            //     }
-            // })
-            console.log(parsedData)
-
             const xScale = d3.scaleTime()
-                             .domain(d3.extent(parsedData, d => d.modifiedDate))
+                             .domain(d3.extent(salesData, d => d.modifiedDate))
                              .range([0, w])
             
             const yScale = d3.scaleLinear()
-                             .domain([0, d3.max(parsedData, d => d.orderQty)])
+                             .domain([0, ((d3.max(salesData, d => d.orderQty)) * 1.1)])
                              .range([h, 0])
     
             const line = d3.line()
                            .x((d, i) => xScale(d.modifiedDate))
                            .y(d => yScale(d.orderQty))
-                           .curve(d3.curveCardinal)
     
             let xAxis = d3.axisBottom(xScale)
-                          .ticks(parsedData.length - 1)
-    
-            svg.select(".x-axis")
+                          .ticks(d3.timeMonth.every(2))
+                          .tickFormat(d3.timeFormat('%b %y'))
+
+            
+            svg.selectAll('g').remove()
+
+            svg.append("g")
                .transition()
                .duration(350)
+               .attr('class', 'x-axis')
                .call(xAxis)
                .attr('transform', `translate(0, ${h})`)
+
+            let yAxis = d3.axisLeft(yScale)
     
-            const yAxis = d3.axisLeft(yScale)
-                            .ticks(100)
-                            // .ticks(d3.max(parsedData, d => d.orderQty) / 5)
-    
-            svg.select('y-axis')
+            svg.append('g')
+               .transition()
+               .duration(350)
+               .attr('class', 'y-axis')
                .call(yAxis)
+               .attr('transform', 'translate(0, 0')
     
             svg.selectAll('path').remove()
-            svg.selectAll('text').remove()
             svg.append('path')
-               .datum(parsedData)
+               .datum(salesData)
                .join('path')
                .transition()
                .duration(350)
@@ -105,8 +104,6 @@ export const LineChart = () => {
                .attr('stroke', 'black')
                .attr('stroke-width', 1)
                .attr('d', line)
-    
-            svg.select('.x-axis').call(xAxis)
     
             svg.append('text')
                .attr('class', 'x-axis-label')
@@ -119,7 +116,7 @@ export const LineChart = () => {
                .attr('class', 'y-axis-label')
                .attr('text-anchor', 'middle')
                .attr('transform', 'rotate(-90)')
-               .attr('x', -200)
+               .attr('x', -1 * (h / 2))
                .attr('y', -40)
                .text('Quantity')
         }
@@ -139,6 +136,7 @@ export const LineChart = () => {
         </div>
         <svg className="lineChart" ref={svgRef}>
             <g className="x-axis" />
+            <g className="y-axis" />
         </svg>
     </>
     
